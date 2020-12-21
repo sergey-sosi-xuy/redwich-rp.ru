@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Главная - <?php echo $ucp_settings['s_title']?></title>
@@ -7,7 +8,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<!-- Libs -->
 	<link rel="stylesheet" href="/public/main/libs/bootstrap/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="/public/main/libs/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="/public/main/libs/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" href="/public/main/libs/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/public/main/libs/linea/styles.css">
 
@@ -16,20 +17,24 @@
 	<link rel="stylesheet" type="text/css" href="/public/main/css/media.css">
 	<link rel="stylesheet" type="text/css" href="/public/main/css/aos.css">
 	<link rel="stylesheet" type="text/css" href="/public/main/css/anim.css">
-
+	<!-- new year balls -->
+	<link rel="stylesheet" href="/public/main/libs/newyear/style.css">
 	<link rel="shortcut icon" href="<?php echo $ucp_settings['s_favicon']?>" type="image/png">
- 
+
 </head>
+
 <body>
 	<?php include "view/common/topmenu.php"; ?>
 
-	
-	
+
+
 	<section class="section-news">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-lg-offset-1">
-					<div class="page-title"><h1>Новости</h1></div>
+					<div class="page-title">
+						<h1>Новости</h1>
+					</div>
 					<br>
 					<!-- block 2 -->
 					<?php
@@ -60,22 +65,27 @@
 						else echo "<div class=\"col-lg-12 col-lg-offset col-md-8 col-md-offset\"><br><br><center><h1>Новости отсутствуют!</h1></center></div>";
 					?>
 					<!-- block 3 -->
-					
+
 				</div>
 			</div>
 		</div>
 	</section>
-	
-	<footer>
-        <?php include "view/common/footer.php"; ?>
-    </footer>
 
+	<footer>
+		<?php include "view/common/footer.php"; ?>
+	</footer>
+	<!-- newyear -->
+	<script src="/public/main/libs/newyear/script.js"></script>
+	<!-- end newyear -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" ></script>
-	<script src="/public/main/js/main.js" ></script>
-	<script src="/public/main/js/form.js" ></script>
-	<script src="/public/main/js/aos.js" ></script>
-	<script>AOS.init();</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script src="/public/main/js/main.js"></script>
+	<script src="/public/main/js/form.js"></script>
+	<script src="/public/main/js/aos.js"></script>
+	<script>
+		AOS.init();
+	</script>
 </body>
+
 </html>
