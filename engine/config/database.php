@@ -1,15 +1,20 @@
 ﻿<?php
 include "table.php";
-$host = 'localhost';//
-$dbname = 'redwich-rp';
-$user = 'root';
-$pass = 'root';
-// $host = 'localhost';//
-// $dbname = 'u1149946_site';//
-// $user = 'u1149946_andrei';
-// $pass = 'Fylhtq-2545864';//
+//$sitebase = [
+//    "host" => "127.0.0.1",
+//    "user" => "root",
+//    "password" => "root",
+//    "dbname" => "redwich-rp"
+//];
+$sitebase = [
+    "host" => "79.137.101.30",
+    "user" => "gs78131",
+    "password" => "redwich-2545864",
+    "dbname" => "gs78131"
+];
 $charset = 'utf8';
-
+$host = $sitebase['host'];
+$dbname = $sitebase['dbname'];
 $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 $opt = [
     //PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -17,7 +22,7 @@ $opt = [
     PDO::ATTR_EMULATE_PREPARES   => false,
 ];
 try {
-    $db = new PDO($dsn, $user, $pass, $opt);
+    $db = new PDO($dsn, $sitebase['user'], $sitebase['password'], $opt);
 } catch (PDOException $e) {
     die('Подключение не удалось: ' . $e->getMessage());
 }

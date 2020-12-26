@@ -7,16 +7,15 @@ require_once("engine/classes/loader.php");
 
 
 
-
 if($_SERVER['REQUEST_URI'] == '/')
 {
 	$class = "index";
 	$url = "main";
-
 }
-else if(substr($_SERVER['REQUEST_URI'], 1,6) != 'admin/' && substr($_SERVER['REQUEST_URI'], 1,8) != 'profile/') 
-{
-	
+else if(substr($_SERVER['REQUEST_URI'], 1,6) != 'admin/' &&
+        substr($_SERVER['REQUEST_URI'], 1,8) != 'profile/' &&
+        substr($_SERVER['REQUEST_URI'], 1,7) != 'donate/') {
+
 	$class = substr($_SERVER['REQUEST_URI'], 1); $url = "main";
 	
 }
@@ -29,7 +28,15 @@ else if(substr($_SERVER['REQUEST_URI'], 1,6) == 'admin/') // Админ Разд
 	
 
 }
+else if(substr($_SERVER['REQUEST_URI'], 1,7) == 'donate/') // Админ Раздел
+{
+    $url = "donate";
+    $params = explode("/", substr($_SERVER['REQUEST_URI'], 7));
+    if($params[0] == "") $class = "index";
+    else $class = $params[0];
 
+
+}
 else if(substr($_SERVER['REQUEST_URI'], 1,8) == 'profile/') // Пользовательский Раздел
 {
 	$url = "profile";
@@ -42,7 +49,6 @@ else if(substr($_SERVER['REQUEST_URI'], 1,8) == 'profile/') // Пользова�
 }
 // else $class = substr($_SERVER['REQUEST_URI'], 1); $url = "main"; // Общий Раздел
 
-
 if(file_exists("engine/classes/".$url."/".$class.".php")) {
 	
 	include("engine/classes/".$url."/".$class.".php");
@@ -52,11 +58,9 @@ if(file_exists("engine/classes/".$url."/".$class.".php")) {
 		$obj->get_body();
 	}
 	else {
-		
 		exit("<meta http-equiv='refresh' content='0; url= /error/404.php'>");
 	}
 }
 else {
-	
 	exit("<meta http-equiv='refresh' content='0; url= /error/404.php'>");
 }

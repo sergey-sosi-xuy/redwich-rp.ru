@@ -47,46 +47,61 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
                           name="s_favicon" >
                         </div>
                         <div class="form-group">
-                          <label for="issueinput2">URL Логотипа сайта</label>
-                          <input type="text" id="issueinput2" class="form-control" value="<?php echo $ucp_settings['s_logo']?>"
+                          <label for="issueinput3">URL Логотипа сайта</label>
+                          <input type="text" id="issueinput3" class="form-control" value="<?php echo $ucp_settings['s_logo']?>"
                           name="s_logo" >
                         </div>
                         <div class="form-group">
-                          <label for="issueinput2">URL Логотипа футета</label>
-                          <input type="text" id="issueinput2" class="form-control" value="<?php echo $ucp_settings['s_logo_footer']?>"
+                          <label for="issueinput4">URL Логотипа футета</label>
+                          <input type="text" id="issueinput4" class="form-control" value="<?php echo $ucp_settings['s_logo_footer']?>"
                           name="s_logo_footer" >
                         </div>
                         <div class="form-group">
-                          <label for="issueinput2">URL Группы ВК</label>
-                          <input type="text" id="issueinput2" class="form-control" value="<?php echo $ucp_settings['s_vk']?>"
+                          <label for="issueinput5">URL Группы ВК</label>
+                          <input type="text" id="issueinput5" class="form-control" value="<?php echo $ucp_settings['s_vk']?>"
                           name="s_vk" >
                         </div>
                         <div class="form-group">
-                          <label for="issueinput2">URL Discord</label>
-                          <input type="text" id="issueinput2" class="form-control" value="<?php echo $ucp_settings['s_discord']?>"
+                          <label for="issueinput6">URL Discord</label>
+                          <input type="text" id="issueinput6" class="form-control" value="<?php echo $ucp_settings['s_discord']?>"
                           name="s_discord" >
                         </div>
                         <div class="form-group">
-                          <label for="issueinput2">URL YouTube</label>
-                          <input type="text" id="issueinput2" class="form-control" value="<?php echo $ucp_settings['s_youtube']?>"
+                          <label for="issueinput7">URL YouTube</label>
+                          <input type="text" id="issueinput7" class="form-control" value="<?php echo $ucp_settings['s_youtube']?>"
                           name="s_youtube" >
                         </div>
-                        <div class="form-group">
-                          <label for="issueinput2">About Text</label>
-                          <textarea name="s_about" class="form-control"  id="issueinput2" cols="30" rows="10"
+                          <div class="form-group">
+                              <label for="issueinput8">Publickey из UnitPay</label>
+                              <input type="text" id="issueinput8" class="form-control" value="<?php echo $ucp_settings['s_publicKey']?>"
+                                     name="s_publicKey" >
+                          </div>
+                          <div class="form-group">
+                              <label for="issueinput9">Секретное слово из UnitPay</label>
+                              <input type="text" id="issueinput9" class="form-control" value="<?php echo $ucp_settings['s_secretWord']?>"
+                                     name="s_secretWord" >
+                          </div>
+                          <div class="form-group">
+                              <label for="issueinput10">URl UnitPay</label>
+                              <input type="text" id="issueinput10" class="form-control" value="<?php echo $ucp_settings['s_urlUnitPay']?>"
+                                     name="s_urlUnitPay" >
+                          </div>
+                          <div class="form-group">
+                              <label for="issueinput11">About Text</label>
+                          <textarea name="s_about" class="form-control"  id="issueinput11" cols="30" rows="10"
 ><?=$ucp_settings['s_about']?></textarea>
                         </div>
                         
                         <div class="form-group">
-                          <label for="issueinput6">Шифрование пароля MD5</label>
-                          <select id="issueinput6" name="s_md5" class="form-control">
+                          <label for="issueinput12">Шифрование пароля MD5</label>
+                          <select id="issueinput12" name="s_md5" class="form-control">
                             <option value='<?=$ucp_settings['s_md5']?>'>Сейчас: <?php if($ucp_settings['s_md5']) echo "Включено"; else echo "Отключено";?></option>
                             <?php if($ucp_settings['s_md5']) echo "<option value='0'>Отключить</option>"; else echo "<option value='1'>Включить</option>";?>
                           </select>
                         </div>
                         <div class="form-group">
-                          <label for="issueinput2">Цена рулетки</label>
-                          <input type="number" id="issueinput2" class="form-control" value="<?php echo $ucp_settings['s_donate_cost']?>"
+                          <label for="issueinput13">Цена рулетки</label>
+                          <input type="number" id="issueinput13" class="form-control" value="<?php echo $ucp_settings['s_donate_cost']?>"
                           name="s_donate_cost" >
                         </div>
                         <input type="hidden" name="action" value="save_settings_ucp">

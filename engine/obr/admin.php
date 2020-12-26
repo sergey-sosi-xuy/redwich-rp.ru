@@ -269,6 +269,9 @@ if($_POST['action'] == "save_settings_ucp")
 	$s_favicon = trim($_POST['s_favicon']);
 	$s_md5 = trim($_POST['s_md5']);
 	$s_donate_cost = trim($_POST['s_donate_cost']);
+    $s_publicKey = trim($_POST['s_publicKey']);
+    $s_secretWord = trim($_POST['s_secretWord']);
+    $s_urlUnitPay = trim($_POST['s_urlUnitPay']);
 
 	if(!empty($s_title) && 
 	!empty($s_logo) && 
@@ -278,7 +281,10 @@ if($_POST['action'] == "save_settings_ucp")
 	!empty($s_about) && 
 	!empty($s_vk) && 
 	!empty($s_favicon) && 
-	!empty($s_donate_cost))
+	!empty($s_donate_cost)&&
+    !empty($s_publicKey) &&
+    !empty($s_urlUnitPay) &&
+    !empty($s_secretWord))
 	{
 		$sql = "UPDATE `ucp_settings` SET `s_title` = :title,
 		`s_favicon` = :favicon,
@@ -289,7 +295,10 @@ if($_POST['action'] == "save_settings_ucp")
 		`s_youtube` = :youtube,
 		`s_about` = :about,
 		`s_md5` = :md5,
-		`s_donate_cost` = :cost_donate";
+		`s_donate_cost` = :cost_donate,
+		`s_publicKey` = :publicKey,
+		`s_urlUnitPay` = :urlUnitPay,
+		`s_secretWord` = :secretWord";
 		$statement = $db->prepare($sql);
 		$statement->bindParam (':title', $s_title);
 		$statement->bindParam (':favicon', $s_favicon);
@@ -301,7 +310,11 @@ if($_POST['action'] == "save_settings_ucp")
 		$statement->bindParam (':about', $s_about);
 		$statement->bindParam (':md5', $s_md5);
 		$statement->bindParam (':cost_donate', $s_donate_cost);
-		$statement->execute();
+        $statement->bindParam (':publicKey', $s_publicKey);
+        $statement->bindParam (':urlUnitPay', $s_urlUnitPay);
+        $statement->bindParam (':secretWord', $s_secretWord);
+
+        $statement->execute();
 		if($statement->rowCount()) message('success','Успех!',"Вы успешно обновили данные! Сейчас мы их обновим", "/admin/");
 		else message('warning','Системная Ошибка!',"Нам не удалось сохранить информацию, проверьте наличие таблицы - ucp_settings", "/admin/");
 		

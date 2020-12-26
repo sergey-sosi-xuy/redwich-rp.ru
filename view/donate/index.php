@@ -51,11 +51,11 @@
 								Перед оплатой закройте игру!
 							</p>
 						</div>
-						<form action="" method="">
+						<form method="post" action="/view/donate/donate.php" id="donateform">
 							<div class="form-group">
-								<input type="text" required placeholder="Номер аккаунта" class="d-input"><br>
-								<input type="text" required placeholder="Сумма пополнения" class="d-input margin"><br>
-								<center><button class="btn btn-d">Перейти к оплате</button></center>
+								<input type="text" name="nick" required placeholder="Игровой ник" class="d-input"><br>
+								<input type="text" name="sum" required placeholder="Сумма пополнения" class="d-input margin"><br>
+								<center><button class="btn btn-d" type="submit">Перейти к оплате</button></center>
 							</div>
 						</form>
 					</div>
@@ -73,9 +73,11 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src="/public/main/js/main.js"></script>
 	<script src="/public/main/js/form.js"></script>
 	<script src="/public/main/js/aos.js"></script>
+<!--    animation-->
 	<script>
 		AOS.init();
 	</script>

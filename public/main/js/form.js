@@ -8,35 +8,22 @@ $(document).ready(function () {
 			data: new FormData(this),
 			contentType: false,
 			cache: false,
-		
 			processData: false,
 			success: function(result) {
-				
-				//alert(result);
+				console.log(result);
 				json = jQuery.parseJSON(result);
-				
 				if (json.url) setTimeout(redirect, 2000, json.url);
-
-				
-				swal({   
-
+				swal({
 					title: json.header,
 					text: json.message, 
 					icon: json.status,  
 		              
 		        });
-				
-				
-				
-				
-				
 			}
-
 		});
 	});
 	
 });
-
 function DeleteNews(NewsID) {
 
     var dataString = 'action=delete_news&n_id='+NewsID;
