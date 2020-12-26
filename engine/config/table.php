@@ -4,7 +4,7 @@ $ucp_table_settings = array(
 	//База 
 	'table' => 'acc_player',
 	'id' => 'ID',
-	'name' => 'Login',
+	'name' => 'Name',
 	'pass' => 'Password',
 	'cash' => 'Money',
 	'last_date' => 'LastData',

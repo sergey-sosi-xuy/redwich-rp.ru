@@ -1,6 +1,7 @@
 <?php
 
-require_once('../common/UnitPay.php');
+include('../common/UnitPay.php');
+include('../common/UnitPayModel.php');
 include '../../engine/config/database.php';
 
 $unitPay = new UnitPay($ucp_settings['s_urlUnitPay'], $ucp_settings['s_secretWord']);
@@ -12,13 +13,13 @@ try {
 
     list($method, $params) = array($_GET['method'], $_GET['params']);
 
-    if (empty($request['method'])
-        || empty($request['params'])
-        || !is_array($request['params'])
-    )
-    {
-        return $this->getErrorHandlerResponse('Invalid request');
-    }
+//    if (empty($request['method'])
+//        || empty($request['params'])
+//        || !is_array($request['params'])
+//    )
+//    {
+//        print $unitPay->getErrorHandlerResponse('Invalid request');
+//    }
     $unitPayModel = UnitPayModel::getInstance();
     switch ($method) {
         // Just check order (check server status, check order in DB and etc)
@@ -26,54 +27,53 @@ try {
             if ($unitPayModel->getPaymentByUnitpayId($params['unitpayId']))
             {
                 // Платеж уже существует
-                return $this->getErrorHandlerResponse('Payment already exists');
+                exit ($unitPay->getErrorHandlerResponse('Платеж уже существует'));
             }
             if (!$unitPayModel->createPayment($params['unitpayId'], $params['account'], $params['sum'], $params['sum']))
             {
-                return $this->getErrorHandlerResponse('Unable to create payment database');
+                exit($unitPay->getErrorHandlerResponse('Невозможно создать базу платежей'));
             }
+//            $unitPayModel->createPayment($params['unitpayId'], $params['account'], $params['sum'], $params['sum']);
+            exit($unitPay->getSuccessHandlerResponse('Проверка прошла успешно. Готов платить.'));
 
-            $unitPayModel->createPayment($params['unitpayId'], $params['account'], $params['sum'], $params['sum']);
-            return $unitPay->getSuccessHandlerResponse('Check Success. Ready to pay.');
         }
 
         // Method Pay means that the money received
         case 'pay':{
-
             $payment = $unitPayModel->getPaymentByUnitpayId(
                 $params['unitpayId']
             );
-
+            if (!$payment)
+            {
+                exit ($unitPay->getErrorHandlerResponse('Заказа не существует'));
+            }
             if ($payment && $payment->status == 1)
             {
-                return $this->getResponseSuccess('Payment has already been paid');
+                exit ($unitPay->getErrorHandlerResponse('Оплата уже произведена'));
             }
-
-            if (!$unitPayModel->confirmPaymentByUnitpayId($params['unitpayId']))
+            if (!$unitPayModel->confirmPaymentByUnitpayId($params['unitpayId'],1))
             {
-                return $this->getResponseError('Unable to confirm payment database');
+                exit($unitPay->getErrorHandlerResponse('Невозможно подтвердить платежную базу данных'));
             }
-            pay($params);
-            return $this->getResponseSuccess('PAY is successful');
+            if(!$unitPayModel->donateForAccount($params['account'], $params['sum'])){
+                $unitPayModel->confirmPaymentByUnitpayId($params['unitpayId'],0);
+                exit ($unitPay->getErrorHandlerResponse('Ошибка при выдачи доната на аккаунт'));
+            }
+            exit ($unitPay->getSuccessHandlerResponse('ОПЛАТА прошла успешно'));
 
         }
         // Method Error means that an error has occurred.
         case 'error':
             // Please log error text.
-            print $unitPay->getSuccessHandlerResponse('Error logged');
+            exit ($unitPay->getSuccessHandlerResponse('Ошибка записана'));
             break;
         // Method Refund means that the money returned to the client
         case 'refund':
             // Please cancel the order
-            print $unitPay->getSuccessHandlerResponse('Order canceled');
+            exit($unitPay->getSuccessHandlerResponse('Заказ отменен'));
             break;
     }
 // Oops! Something went wrong.
 } catch (Exception $e) {
     print $unitPay->getErrorHandlerResponse($e->getMessage());
-}
-public function pay($params)
-{
-    $unitPayModel = UnitPayModel::getInstance();
-    $unitPayModel->donateForAccount($params['account'], $params['sum']);
 }

@@ -8,7 +8,7 @@ class Config
     }
     const TABLE_ACCOUNT = 'acc_player';
     // Название поля из таблицы начисления товара по которому производится поиск аккаунта/счета, например `email`
-    const TABLE_ACCOUNT_NAME = 'Login';
+    const TABLE_ACCOUNT_NAME = 'Name';
     // Название поля из таблицы начисления товара которое будет увеличено на колличево оплаченого товара, например `sum`, `donate`
     const TABLE_ACCOUNT_DONATE= 'Donat';
 }
@@ -28,7 +28,7 @@ class UnitPayModel
         $port = ini_get("mysqli.default_port");
 
         $this->mysqli = @new mysqli (
-            $sitebase['MySQL_Host'], $sitebase['MySQL_Login'], $sitebase['MySQL_Password'], $sitebase['MySQL_DataBase'], $port
+            $sitebase['host'], $sitebase['user'], $sitebase['password'], $sitebase['dbname'], $port
         );
         $this->mysqli->set_charset("utf8");
         /* проверка подключения */
@@ -41,7 +41,7 @@ class UnitPayModel
     {
         $query = '
             INSERT INTO
-                unitpay_payments (unitpayId, account, sum, itemsCount, dateCreate, status)
+                `unitpay_payments` (`unitpayId`, `account`, `sum`, `itemsCount`, `dateCreate`, `status`)
             VALUES
                 (
                     "'.$this->mysqli->real_escape_string($unitpayId).'",
@@ -60,9 +60,9 @@ class UnitPayModel
     {
         $query = '
                 SELECT * FROM
-                    unitpay_payments
+                    `unitpay_payments`
                 WHERE
-                    unitpayId = "'.$this->mysqli->real_escape_string($unitpayId).'"
+                    `unitpayId` = "'.$this->mysqli->real_escape_string($unitpayId).'"
                 LIMIT 1
             ';
             
@@ -75,16 +75,16 @@ class UnitPayModel
         return $result->fetch_object();
     }
 
-    public function confirmPaymentByUnitpayId($unitpayId)
+    public function confirmPaymentByUnitpayId($unitpayId,$status)
     {
         $query = '
                 UPDATE
                     unitpay_payments
                 SET
-                    status = 1,
-                    dateComplete = NOW()
+                    `status` = "'.$status.'",
+                    `dateComplete` = NOW()
                 WHERE
-                    unitpayId = "'.$this->mysqli->real_escape_string($unitpayId).'"
+                    `unitpayId` = "'.$this->mysqli->real_escape_string($unitpayId).'"
                 LIMIT 1
             ';
         return $this->mysqli->query($query);
@@ -96,9 +96,9 @@ class UnitPayModel
             SELECT
                 *
             FROM
-               ".Config::TABLE_ACCOUNT."
+               `".Config::TABLE_ACCOUNT."`
             WHERE
-               ".Config::TABLE_ACCOUNT_NAME." = '".$this->mysqli->real_escape_string($account)."'
+               `".Config::TABLE_ACCOUNT_NAME."` = '".$this->mysqli->real_escape_string($account)."'
             LIMIT 1
          ";
          
@@ -116,13 +116,12 @@ class UnitPayModel
     {
         $query = "
             UPDATE
-                `.Config::TABLE_ACCOUNT.`
+                `".Config::TABLE_ACCOUNT."`
             SET
-                ".Config::TABLE_ACCOUNT_DONATE." = ".Config::TABLE_ACCOUNT_DONATE." + ".$this->mysqli->real_escape_string($count)."
+                `".Config::TABLE_ACCOUNT_DONATE."` = `".Config::TABLE_ACCOUNT_DONATE."` + ".$this->mysqli->real_escape_string($count)."
             WHERE
-                ".Config::TABLE_ACCOUNT_NAME." = '".$this->mysqli->real_escape_string($account)."'
-        ";
-        
+                `".Config::TABLE_ACCOUNT_NAME."` = '".$this->mysqli->real_escape_string($account)."'";
+//        print $query;
         return $this->mysqli->query($query);
     }
 }
