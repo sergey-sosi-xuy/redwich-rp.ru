@@ -16,9 +16,11 @@
         </li>
         <li class=" nav-item"><a href="/admin/"><i class="fas fa-home"></i><span class="menu-title" data-i18n="">Главное</span></a>
         </li>
-        <li class=" nav-item"><a href="/admin/roulette"><i class="fas fa-money"></i><span class="menu-title" data-i18n="">Рулетка</span></a>
+        <li class=" nav-item"><a href="/admin/roulette"><i class="fas fa-money-bill-wave"></i><span class="menu-title" data-i18n="">Рулетка</span></a>
         </li>
-        <li class=" nav-item"><a href="/admin/news"><i class="fas fa-list"></i><span class="menu-title" data-i18n="">Новости</span></a>
+          <li class=" nav-item"><a href="/admin/admins"><i class="fas fa-users"></i><span class="menu-title" data-i18n="">Администаторы</span></a>
+          </li>
+        <li class=" nav-item"><a href="/admin/news"><i class="fas fa-newspaper"></i><span class="menu-title" data-i18n="">Новости</span></a>
         </li>
         <li class=" nav-item"><a href="/admin/server"><i class="fas fa-list"></i><span class="menu-title" data-i18n="">Сервера</span></a>
         </li>

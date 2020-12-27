@@ -2,7 +2,7 @@
 session_start();
 require_once ("../functions.php");
 global $db;
-
+global $ucp_settings;
 
 if($_POST['action'] == "go_login") 
 {
@@ -22,7 +22,7 @@ if($_POST['action'] == "go_login")
 			{
 				$data = $statement->fetch();
 
-			 	
+                    $data['a_pass'] = ($ucp_settings['s_md5'] == 1)?md5($data['a_pass']):$data['a_pass'];
 					if($data['a_pass'] == $password)
 				 	{
 				 		session_start();
@@ -60,7 +60,22 @@ if($_POST['action'] == "update_servers")
 		else message('warning','Системная Ошибка!',"Нам не удалось создать новость, проверьте наличие таблицы - ucp_servers", "/admin/server");
 	}
 }
+if($_POST['action'] == "update_admins")
+{
+    $a_id = trim($_POST['a_id']);
+    $a_admin = trim($_POST['a_admin']);
+    $a_pass = trim($_POST['a_pass']);
+    if(!empty($a_admin) && !empty($a_pass))
+    {
+        $a_pass = ($ucp_settings['s_md5'] == 1)?md5($a_pass):$a_pass;
+        $sql = "UPDATE `ucp_admin` SET `a_admin` = '{$a_admin}',`a_pass` = '{$a_pass}' WHERE `a_id` = '{$a_id}'";
+        $result = $db->query($sql, PDO::FETCH_ASSOC);
+        if($result) message('success','Успех!',"Вы успешно сохранили аккаунт администратора!", "/admin/admins");
+        else message('warning','Системная Ошибка!',"Нам не удалось сохранить аккаунт администратора, проверьте наличие таблицы - ucp_admin", "/admin/admins");
+    }
+    else message('warning','Ошибка!',"Заполните поле");
 
+}
 if($_POST['action'] == "update_news")
 {
 	$n_id = trim($_POST['n_id']);
@@ -104,6 +119,18 @@ if($_POST['action'] == "delete_news")
 		if($result) message('success','Успех!',"Вы успешно удалили новость!", "/admin/news");
 		else message('warning','Системная Ошибка!',"Нам не удалось удалить новость, проверьте наличие таблицы - ucp_news", "/admin/news");
 	}
+
+}
+if($_POST['action'] == "delete_admin")
+{
+    $a_id = trim($_POST['a_id']);
+    if(!empty($a_id))
+    {
+        $sql = "DELETE FROM `ucp_admin` WHERE `a_id` = '{$a_id}'";
+        $result = $db->query($sql, PDO::FETCH_ASSOC);
+        if($result) message('success','Успех!',"Вы успешно удалили аккаунт администратора!", "/admin/news");
+        else message('warning','Системная Ошибка!',"Нам не удалось удалить аккаунт администратора, проверьте наличие таблицы - ucp_news", "/admin/admins");
+    }
 
 }
 if($_POST['action'] == "delete_item_roulette")
@@ -179,6 +206,20 @@ if($_POST['action'] == "create_servers")
 		else message('warning','Системная Ошибка!',"Нам не удалось создать новость, проверьте наличие таблицы - ucp_servers", "/admin/server");
 	}
 	else message('warning','Ошибка!',"Заполните поле");	
+}
+if($_POST['action'] == "create_admins")
+{
+    $a_admin = trim($_POST['a_admin']);
+    $a_pass = trim($_POST['a_pass']);
+    if(!empty($a_admin) && !empty($a_pass))
+    {
+        $data['a_pass'] = ($ucp_settings['s_md5'] == 1)?md5($data['a_pass']):$data['a_pass'];
+        $sql = "INSERT INTO `ucp_admin` ( `a_admin`, `a_pass`) VALUES ( '{$a_admin}', '{$a_pass}')";
+        $result = $db->query($sql, PDO::FETCH_ASSOC);
+        if($result) message('success','Успех!',"Вы успешно создали аккаунт администратора!", "/admin/admins");
+        else message('warning','Системная Ошибка!',"Нам не удалось создать новость, проверьте наличие таблицы - ucp_news", "/admin/admins");
+    }
+    else message('warning','Ошибка!',"Заполните поле");
 }
 
 if($_POST['action'] == "create_news")

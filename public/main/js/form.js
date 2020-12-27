@@ -50,6 +50,32 @@ function DeleteNews(NewsID) {
         }
     });
 }
+function DeleteAdmin(AdminID) {
+
+	var dataString = 'action=delete_admin&a_id='+AdminID;
+	//alert(dataString);
+	$.ajax({
+		type: "POST",
+		url: "/engine/obr/admin.php",
+		data: dataString,
+		cache: false,
+		success: function(data){
+			json = jQuery.parseJSON(data);
+
+			if (json.url) setTimeout(redirect, 2000, json.url);
+
+
+			swal({
+
+				title: json.header,
+				text: json.message,
+				icon: json.status,
+
+			});
+
+		}
+	});
+}
 function DeleteServer(ServerID) {
     var dataString = 'action=delete_server&s_id='+ServerID;
     // alert(dataString);

@@ -4,8 +4,9 @@ include '../../engine/functions.php';
 include '../common/UnitPay.php';
 
 $data = $_POST;
+$min = 1;
 $unitPay = new UnitPay($ucp_settings['s_urlUnitPay'], $ucp_settings['s_secretWord']);
-if(intval($data['sum']) >= 10){
+if(intval($data['sum']) >= $min){
     $sql = "SELECT * FROM `{$ucp_table_settings['table']}` WHERE `{$ucp_table_settings['name']}` = '{$data['nick']}' LIMIT 1";
     $statement = $db->prepare($sql);
     $statement->execute ();
@@ -24,7 +25,7 @@ if(intval($data['sum']) >= 10){
         message("warning","Ошибка!", "Такого пользователя нет");
     }
 }
-else message("warning","Ошибка!", "Минимальная сумма пополнения 10 руб.");
+else message("warning","Ошибка!", "Минимальная сумма пополнения "+$min+" руб.");
 
 
 
