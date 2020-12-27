@@ -313,8 +313,10 @@ if($_POST['action'] == "save_settings_ucp")
     $s_publicKey = trim($_POST['s_publicKey']);
     $s_secretWord = trim($_POST['s_secretWord']);
     $s_urlUnitPay = trim($_POST['s_urlUnitPay']);
+    $s_minDonate = trim($_POST['s_minDonate']);
 
-	if(!empty($s_title) && 
+
+    if(!empty($s_title) &&
 	!empty($s_logo) && 
 	!empty($s_logo_footer) && 
 	!empty($s_youtube) && 
@@ -325,6 +327,7 @@ if($_POST['action'] == "save_settings_ucp")
 	!empty($s_donate_cost)&&
     !empty($s_publicKey) &&
     !empty($s_urlUnitPay) &&
+    !empty($s_minDonate) &&
     !empty($s_secretWord))
 	{
 		$sql = "UPDATE `ucp_settings` SET `s_title` = :title,
@@ -339,6 +342,7 @@ if($_POST['action'] == "save_settings_ucp")
 		`s_donate_cost` = :cost_donate,
 		`s_publicKey` = :publicKey,
 		`s_urlUnitPay` = :urlUnitPay,
+		`s_minDonate` = :minDonate,
 		`s_secretWord` = :secretWord";
 		$statement = $db->prepare($sql);
 		$statement->bindParam (':title', $s_title);
@@ -353,6 +357,7 @@ if($_POST['action'] == "save_settings_ucp")
 		$statement->bindParam (':cost_donate', $s_donate_cost);
         $statement->bindParam (':publicKey', $s_publicKey);
         $statement->bindParam (':urlUnitPay', $s_urlUnitPay);
+        $statement->bindParam (':minDonate', $s_minDonate);
         $statement->bindParam (':secretWord', $s_secretWord);
 
         $statement->execute();

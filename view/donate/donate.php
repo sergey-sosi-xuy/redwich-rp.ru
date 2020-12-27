@@ -4,7 +4,7 @@ include '../../engine/functions.php';
 include '../common/UnitPay.php';
 
 $data = $_POST;
-$min = 1;
+$min = $ucp_settings['s_minDonate'];
 $unitPay = new UnitPay($ucp_settings['s_urlUnitPay'], $ucp_settings['s_secretWord']);
 if(intval($data['sum']) >= $min){
     $sql = "SELECT * FROM `{$ucp_table_settings['table']}` WHERE `{$ucp_table_settings['name']}` = '{$data['nick']}' LIMIT 1";
