@@ -1,6 +1,25 @@
 AddDefaultCharset utf-8
 RewriteEngine on
+RewriteBase /
 
+RewriteCond %{REQUEST_URI} ^/400/$
+RewriteRule ^(.*)$ /view/errors/400.php [L]
+RewriteCond %{REQUEST_URI} ^/401/$
+RewriteRule ^(.*)$ /view/errors/401.php [L]
+RewriteCond %{REQUEST_URI} ^/403/$
+RewriteRule ^(.*)$ /view/errors/403.php [L]
+RewriteCond %{REQUEST_URI} ^/404/$
+RewriteRule ^(.*)$ /view/errors/404.php [L]
+RewriteCond %{REQUEST_URI} ^/408/$
+RewriteRule ^(.*)$ /view/errors/408.php [L]
+RewriteCond %{REQUEST_URI} ^/500/$
+RewriteRule ^(.*)$ /view/errors/500.php [L]
+RewriteCond %{REQUEST_URI} ^/501/$
+RewriteRule ^(.*)$ /view/errors/501.php [L]
+RewriteCond %{REQUEST_URI} ^/502/$
+RewriteRule ^(.*)$ /view/errors/502.php [L]
+RewriteCond %{REQUEST_URI} ^/503/$
+RewriteRule ^(.*)$ /view/errors/503.php [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
