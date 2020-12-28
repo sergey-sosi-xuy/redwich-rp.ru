@@ -11,6 +11,98 @@ body {
   -webkit-font-smoothing: antialised;
 }
 
+#loader {
+  display: block;
+  position: fixed;
+  z-index: 99999;
+
+  left: 50%;
+  top: 50%;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #ff780a;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+#loader:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #ff4800;
+  -webkit-animation: spin 3s linear infinite;
+  animation: spin 3s linear infinite;
+}
+#loader:after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  border-top-color: #d25e00;
+  -webkit-animation: spin 1.5s linear infinite;
+  animation: spin 1.5s linear infinite;
+}
+@-webkit-keyframes spin {
+  0%   {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0%   {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+#preloader {
+  background: #e8edfa;
+  position: fixed;
+  z-index: 99998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+  /*border-radius: 10px;*/
+}
+
+::-webkit-scrollbar-thumb {
+  /*border-radius: 10px;*/
+  -webkit-box-shadow: inset 0 0 50px rgba(255, 72, 0, 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  -webkit-box-shadow: inset 0 0 50px rgba(255, 120, 10, 1);
+}
 
 .user_skin img {
   margin-left: -15px;
@@ -503,7 +595,7 @@ section {
 
 .hl-menu>ul>li>a {
   text-transform: uppercase;
-  font-family: 'Open Sans Semibold';
+  /*font-family: 'Open Sans Semibold';*/
   color: #fff;
   padding: 10px;
   line-height: 60px;
@@ -750,7 +842,43 @@ section {
   font-size: 13px;
   padding: 10px;
 }
+.heading {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 140px;
+}
+.heading h1 {
+  font-weight: 400;
+  font-size: 2.1rem;
+}
+.heading img {
+  position: absolute;
+  margin-top: -20px;
+  margin-left: 50px
 
+}
+.breaker2 {
+  margin-top: 10px;
+  width: 58px;
+  height: 10px;
+  background: rgba(255, 72, 0, .6);
+  background: linear-gradient(to right, rgba(255, 72, 0, 1) 0%, rgba(255, 120, 10, 1) 100%) no-repeat bottom;
+  border-radius: 40px;
+  margin-left: 10px;
+
+}
+.breaker {
+  margin-top: 10px;
+  width: 58px;
+  height: 10px;
+  background: rgba(255, 72, 0, 0.6);
+  background: linear-gradient(to right, rgba(255, 72, 0, 1) 0%, rgba(255, 120, 10, 1) 100%) no-repeat bottom;
+
+  border-radius: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
 /* ------------------------------------------------------------ */
 /* ------------------------ DONATE.HTML ----------------------- */
 /* ------------------------------------------------------------ */
