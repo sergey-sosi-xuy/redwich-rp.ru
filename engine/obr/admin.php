@@ -22,7 +22,7 @@ if($_POST['action'] == "go_login")
 			{
 				$data = $statement->fetch();
 
-                    $data['a_pass'] = ($ucp_settings['s_md5'] == 1)?md5($data['a_pass']):$data['a_pass'];
+                    $password = ($ucp_settings['s_md5'] == 1)?md5($password):$password;
 					if($data['a_pass'] == $password)
 				 	{
 				 		session_start();

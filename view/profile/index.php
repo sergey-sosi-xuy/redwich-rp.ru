@@ -138,14 +138,15 @@
 
               </table><br>
               <?php
-               global $db;
+                global $db;
                 $name = $_SESSION['NickName'];
                 $sql = "SELECT * FROM `admin` WHERE `aName` = '{$name}' LIMIT 1";
                 $statement = $db->prepare($sql);
                 $statement->execute ();
                 if($statement->rowCount()) echo'<a class="btn btn-d" href="/admin/">Админ панель</a>';
                ?>
-              <a class="btn btn-d" href="/profile/exit">Выход</a>
+                <a class="btn btn-d" href="/profile/exit">Выход</a>
+                <a class="btn btn-d" href="/profile/roulette">Рулетка</a>
             </div>
           </div>
         </div>
